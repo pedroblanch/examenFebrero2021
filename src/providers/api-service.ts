@@ -56,5 +56,24 @@ eliminarAlumno(id:number):Promise<Boolean>{
         });
         return promise;
 }//end_eliminar_alumno
+
+modificarAlumno(idAlumno:number, nuevosDatosAlumno:Alumno):Promise<Alumno>{
+    let promise = new Promise<Alumno>((resolve, reject) => {
+        var header = { "headers": {"Content-Type": "application/json"} };
+        let datos = nuevosDatosAlumno.getJsonObject();
+        this.http.put(this.URL+"/alumnos/"+idAlumno,
+                          JSON.stringify(datos),
+                          header).toPromise().then(
+          (data:any) => { // Success
+            let alumno:Alumno;
+                alumno=Alumno.createFromJsonObject(data);
+            resolve(alumno);
+          }
+        )
+        .catch((error:Error)=>{
+          reject(error.message);});
+      });
+      return promise;
+}
     
 }//end_class
