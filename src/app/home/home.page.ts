@@ -135,6 +135,6 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
     });
 
     await alert.present();
-  }
+  }//end_modificarAlumno
 
 }//end_class

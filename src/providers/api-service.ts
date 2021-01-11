@@ -74,6 +74,6 @@ modificarAlumno(idAlumno:number, nuevosDatosAlumno:Alumno):Promise<Alumno>{
           reject(error.message);});
       });
       return promise;
-}
+}//end_modificar_alumno
     
 }//end_class
