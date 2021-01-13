@@ -38,6 +38,12 @@ export class EditarAlumnoPage implements OnInit {
         Validators.pattern('^[a-zA-Z0-9_.+-]+[@]{1}[a-zA-Z0-9-]+[.]{1}[a-zA-Z]+$'),
         Validators.required
         ])),
+      address: new FormControl(this.alumno.address, Validators.compose([
+          Validators.maxLength(50),
+          Validators.minLength(1),
+          Validators.pattern('^[a-z A-Z0-9]+$'),
+          Validators.required
+          ])),
       city: new FormControl(this.alumno.city, Validators.compose([
         Validators.maxLength(50),
         Validators.minLength(1),

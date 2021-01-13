@@ -2,13 +2,13 @@
   "alumnos": [
     {
       "id": 1,
-      "first_name": "Aggi",
-      "last_name": "Habbeshaw",
-      "email": "ahabbeshaw2@fc2.com",
-      "gender": "Female",
+      "first_name": "Pedro",
+      "last_name": "Blanch Leiva",
+      "email": "ppkasjkjas@asjh.es",
+      "gender": "Male",
       "avatar": "https://robohash.org/placeatdoloribuset.jpg?size=50x50&set=set1",
-      "address": "07 Moose Point",
-      "city": "Brondong"
+      "address": "kasjkajs  aksj kasj ",
+      "city": "Sevilla"
     },
     {
       "id": 3,
@@ -37,11 +37,10 @@
       "first_name": "Harvey",
       "last_name": "Fretwell",
       "email": "hfretwellb@blogspot.com",
-      "gender": "Male",
+      "gender": "Female",
       "avatar": "https://robohash.org/etquianimi.jpg?size=50x50&set=set1",
       "address": "5 Oriole Place",
-      "city": "Kamloops",
-      "postalCode": "H9P"
+      "city": "Kamloops"
     },
     {
       "id": 14,
@@ -51,8 +50,7 @@
       "gender": "Female",
       "avatar": "https://robohash.org/maioresullamquia.jpg?size=50x50&set=set1",
       "address": "4 Paget Court",
-      "city": "Krathum Baen",
-      "postalCode": "74110"
+      "city": "Krathum Baen"
     },
     {
       "id": 15,
@@ -73,7 +71,7 @@
       "gender": "Male",
       "avatar": "https://robohash.org/velidsit.bmp?size=50x50&set=set1",
       "address": "17966 Charing Cross Center",
-      "city": "Dawusu"
+      "city": "Dawusurr"
     },
     {
       "id": 17,

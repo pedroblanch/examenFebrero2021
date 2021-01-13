@@ -150,12 +150,19 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
 
   modal.onDidDismiss().then((data) => {
     if (data['data'] != null) { 
-      let alumnoModificado=JSON.parse(data['data']);
-      this.alumnos[indice]=alumnoModificado;
+      let alumnoJSON=JSON.parse(data['data']);
+      let alumnoModificado:Alumno = Alumno.createFromJsonObject(alumnoJSON);
+      this.apiService.modificarAlumno(alumnoModificado.id,alumnoModificado)  //se hace PUT a la API
+              .then( (alumno:Alumno)=> {
+                this.alumnos[indice]=alumno;  //si se ha modificado en la api se actualiza en la lista
+              })
+              .catch( (error:string) => {
+                  console.log(error);
+              });
     }
   });
   
   return await modal.present();
-}
+} //end_modificarAlumno
 
 }//end_class
