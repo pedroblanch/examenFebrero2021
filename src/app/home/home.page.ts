@@ -4,6 +4,13 @@ import { ApiServiceProvider } from 'src/providers/api-service';
 import { EditarAlumnoPage } from '../editar-alumno/editar-alumno.page';
 import { Alumno } from '../modelo/alumno';
 
+import { Storage } from '@ionic/storage';
+
+enum storageTypeEnum {
+  LOCAL='LOCAL',
+  REMOTE='REMOTE'
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -13,9 +20,12 @@ import { Alumno } from '../modelo/alumno';
 export class HomePage implements OnInit{
 
   private alumnos=new Array<Alumno>();
+  private storageType:string;
+  
 
   constructor(private apiService: ApiServiceProvider,
-    public alertController:AlertController, public modalController: ModalController) {
+    public alertController:AlertController, public modalController: ModalController,
+    private storage: Storage) {
   }
 
 /*
@@ -26,6 +36,14 @@ Si ha ido mal el acceso (por ejemplo si no hemos lanzado jsonServer) se coge el 
 
 
   ngOnInit(): void {
+    this.storage.get('storageType')
+    .then((val) => {
+      if(val!=null)
+        this.storageType=val;
+      else
+        this.storageType=storageTypeEnum.REMOTE;
+      })
+    .catch( () => {this.storageType=storageTypeEnum.REMOTE;});
     this.apiService.getAlumnos()
       .then( (alumnos:Alumno[])=> {
           this.alumnos=alumnos;
@@ -164,5 +182,55 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
   
   return await modal.present();
 } //end_modificarAlumno
+
+async settings() {
+  let checkedRemote:boolean=false;
+  let checkedLocal:boolean=false;
+  switch(this.storageType){
+    case storageTypeEnum.LOCAL:
+      checkedLocal=true;
+      break;
+    case storageTypeEnum.REMOTE:
+      checkedRemote=true;
+      break;
+  }
+  const alert = await this.alertController.create({
+    header: 'settings',
+    inputs: [
+      {
+        name: 'local',
+        type: 'radio',
+        label: 'local',
+        value: storageTypeEnum.LOCAL,
+        checked: checkedLocal
+      },
+      {
+        name: 'remoto',
+        type: 'radio',
+        label: 'remoto',
+        value: storageTypeEnum.REMOTE,
+        checked: checkedRemote
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: () => {
+          console.log('Confirm Cancel');
+        }
+      }, {
+        text: 'Ok',
+        handler: (data) => {
+          this.storage.set('storageType',data).then((data)=>{
+            this.storageType=data });
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+}//end_settings
 
 }//end_class

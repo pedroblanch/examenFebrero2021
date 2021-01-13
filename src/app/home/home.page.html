@@ -1,5 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="settings()">
+        <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>     
     <ion-title>
       Alumnos
     </ion-title>
@@ -7,7 +12,6 @@
 </ion-header>
 
 <ion-content>
- 
   <ion-card *ngFor="let alumno of alumnos; let indice=index;">
     <ion-grid>
       <ion-row>
