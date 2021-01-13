@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { ApiServiceProvider } from 'src/providers/api-service';
+import { EditarAlumnoPage } from '../editar-alumno/editar-alumno.page';
 import { Alumno } from '../modelo/alumno';
 
 @Component({
@@ -14,7 +15,7 @@ export class HomePage implements OnInit{
   private alumnos=new Array<Alumno>();
 
   constructor(private apiService: ApiServiceProvider,
-    public alertController:AlertController) {
+    public alertController:AlertController, public modalController: ModalController) {
   }
 
 /*
@@ -50,6 +51,7 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
     });
   }//end_eliminar_alumno
 
+  /*
   async modificarAlumno(indice:number) {
     let alumno=this.alumnos[indice];
     const alert = await this.alertController.create({
@@ -77,10 +79,10 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
         },
         {
           name: 'gender',
-          id: 'gender',
-          type: 'text',
-          value: alumno.gender,
-          placeholder: 'gender'
+          type: 'radio',
+          label: 'Male',
+          value: 'Male',
+          checked: true
         },
         {
           name: 'avatar',
@@ -136,5 +138,24 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
 
     await alert.present();
   }//end_modificarAlumno
+  */
+
+ async modificarAlumno(indice:number) {
+  const modal = await this.modalController.create({
+    component: EditarAlumnoPage,
+    componentProps: {
+      'alumnoJson': JSON.stringify(this.alumnos[indice])
+    }
+  });
+
+  modal.onDidDismiss().then((data) => {
+    if (data['data'] != null) { 
+      let alumnoModificado=JSON.parse(data['data']);
+      this.alumnos[indice]=alumnoModificado;
+    }
+  });
+  
+  return await modal.present();
+}
 
 }//end_class
