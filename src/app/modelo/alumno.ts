@@ -10,7 +10,6 @@ export class Alumno {
         public city:string
         )
     {  }
-
     
     public static createFromJsonObject(jsonObject:any):Alumno
     {

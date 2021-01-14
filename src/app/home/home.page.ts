@@ -183,6 +183,31 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
   return await modal.present();
 } //end_modificarAlumno
 
+async nuevoAlumno() {
+  const modal = await this.modalController.create({
+    component: EditarAlumnoPage,
+    componentProps: {
+      'alumnoJson': JSON.stringify(new Alumno(-1,
+        "","","","","","",""))
+    }
+  });
+
+  modal.onDidDismiss().then((data) => {
+    if (data['data'] != null) { 
+      let alumnoJSON=JSON.parse(data['data']);
+      let alumnoNuevo:Alumno = Alumno.createFromJsonObject(alumnoJSON);      
+      this.apiService.insertarAlumno(alumnoNuevo)  //se hace POST a la API
+              .then( (alumno:Alumno)=> {
+                this.alumnos.push(alumno);  //si se ha insertado en la api se añade en la lista
+              })
+              .catch( (error:string) => {
+                  this.presentToast("Error al insertar: "+error);
+              });
+    }
+  });
+  
+  return await modal.present();
+} //end_nuevoAlumno
 
 async settings() {
   let checkedRemote:boolean=false;
