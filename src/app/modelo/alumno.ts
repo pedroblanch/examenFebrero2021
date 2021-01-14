@@ -27,7 +27,8 @@ export class Alumno {
     public getJsonObject():any
     {
         let jsonObject:any={};
-        jsonObject['id']=this.id;
+        if(this.id!=-1)  //si el id es -1 no lo paso a JSON. Se trata de un nuevo alumno.
+            jsonObject['id']=this.id;
         jsonObject['first_name']=this.first_name;
         jsonObject['last_name']=this.last_name;
         jsonObject['email']=this.email;

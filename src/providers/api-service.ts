@@ -73,7 +73,7 @@ modificarAlumno(idAlumno:number, nuevosDatosAlumno:Alumno):Promise<Alumno>{
           reject(error.message);});
       });
       return promise;
-}//end_modificar_alumno
+}//end_modificarAlumno
 
 insertarAlumno(datosNuevoAlumno:Alumno):Promise<Alumno>{
     let promise = new Promise<Alumno>((resolve, reject) => {
@@ -92,6 +92,6 @@ insertarAlumno(datosNuevoAlumno:Alumno):Promise<Alumno>{
           reject(error.message);});
       });
       return promise;
-}//end_modificar_alumno
+}//end_insertarAlumno
     
 }//end_class
