@@ -46,7 +46,6 @@ eliminarAlumno(id:number):Promise<Boolean>{
     let promise = new Promise<Boolean>((resolve, reject) => {
         this.http.delete(this.URL+"/alumnos/"+id).toPromise().then(
             (data:any) => { // Success
-            console.log(data)
             resolve(true);
             }
         )

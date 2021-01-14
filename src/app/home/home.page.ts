@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { ApiServiceProvider } from 'src/providers/api-service';
 import { EditarAlumnoPage } from '../editar-alumno/editar-alumno.page';
 import { Alumno } from '../modelo/alumno';
@@ -25,7 +25,7 @@ export class HomePage implements OnInit{
 
   constructor(private apiService: ApiServiceProvider,
     public alertController:AlertController, public modalController: ModalController,
-    private storage: Storage) {
+    private storage: Storage, public toastController: ToastController) {
   }
 
 /*
@@ -49,7 +49,7 @@ Si ha ido mal el acceso (por ejemplo si no hemos lanzado jsonServer) se coge el 
           this.alumnos=alumnos;
       })
       .catch( (error:string) => {
-          console.log(error);
+          this.presentToast("Error al obtener alumnos: "+error);
       });
   }
 
@@ -61,11 +61,10 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
   eliminarAlumno(indice:number){
     this.apiService.eliminarAlumno(this.alumnos[indice].id)
     .then( (correcto:boolean ) => {
-      console.log("Borrado correcto del alumno con indice: "+indice);
       this.alumnos.splice(indice,1);
     })
     .catch( (error:string) => {
-        console.log("Error al borrar: "+error);
+        this.presentToast("Error al borrar: "+error);
     });
   }//end_eliminar_alumno
 
@@ -158,6 +157,7 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
   }//end_modificarAlumno
   */
 
+
  async modificarAlumno(indice:number) {
   const modal = await this.modalController.create({
     component: EditarAlumnoPage,
@@ -175,13 +175,14 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
                 this.alumnos[indice]=alumno;  //si se ha modificado en la api se actualiza en la lista
               })
               .catch( (error:string) => {
-                  console.log(error);
+                  this.presentToast("Error al modificar: "+error);
               });
     }
   });
   
   return await modal.present();
 } //end_modificarAlumno
+
 
 async settings() {
   let checkedRemote:boolean=false;
@@ -218,7 +219,6 @@ async settings() {
         role: 'cancel',
         cssClass: 'secondary',
         handler: () => {
-          console.log('Confirm Cancel');
         }
       }, {
         text: 'Ok',
@@ -232,5 +232,13 @@ async settings() {
 
   await alert.present();
 }//end_settings
+
+async presentToast(message:string) {
+  const toast = await this.toastController.create({
+    message: message,
+    duration: 2000
+  });
+  toast.present();
+}
 
 }//end_class
