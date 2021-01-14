@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Alumno } from 'src/app/modelo/alumno';
+import { InterfaceProvider } from 'src/app/modelo/interfaceProvider';
 
 @Injectable()
-export class ApiServiceProvider {
+export class ApiServiceProvider implements InterfaceProvider{
     
     private URL="http://localhost:3000";
 
