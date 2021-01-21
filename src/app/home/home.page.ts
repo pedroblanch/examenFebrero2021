@@ -7,8 +7,8 @@ import { Alumno } from '../modelo/alumno';
 import { Storage } from '@ionic/storage';
 
 enum storageTypeEnum {
-  LOCAL='LOCAL',
-  REMOTE='REMOTE'
+  JSON_SERVER='JSON_SERVER',
+  FIREBASE='FIREBASE'
 }
 
 @Component({
@@ -41,16 +41,23 @@ Si ha ido mal el acceso (por ejemplo si no hemos lanzado jsonServer) se coge el 
       if(val!=null)
         this.storageType=val;
       else
-        this.storageType=storageTypeEnum.REMOTE;
+        this.storageType=storageTypeEnum.JSON_SERVER;
+      switch(this.storageType){
+        case storageTypeEnum.JSON_SERVER:
+          this.apiService.getAlumnos()
+            .then( (alumnos:Alumno[])=> {
+              this.alumnos=alumnos;
+            })
+            .catch( (error:string) => {
+                this.presentToast("Error al obtener alumnos: "+error);
+            });
+          break;
+        case storageTypeEnum.FIREBASE:
+          this.presentToast("Aún no se ha implementado la conexión a firebase");
+          break;
+      }
       })
-    .catch( () => {this.storageType=storageTypeEnum.REMOTE;});
-    this.apiService.getAlumnos()
-      .then( (alumnos:Alumno[])=> {
-          this.alumnos=alumnos;
-      })
-      .catch( (error:string) => {
-          this.presentToast("Error al obtener alumnos: "+error);
-      });
+    .catch( () => {this.presentToast("Error al recuperar variable tipo de conexión");});
   }
 
 
@@ -183,6 +190,7 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
   return await modal.present();
 } //end_modificarAlumno
 
+
 async nuevoAlumno() {
   const modal = await this.modalController.create({
     component: EditarAlumnoPage,
@@ -210,32 +218,32 @@ async nuevoAlumno() {
 } //end_nuevoAlumno
 
 async settings() {
-  let checkedRemote:boolean=false;
-  let checkedLocal:boolean=false;
+  let checkedJsonServer:boolean=false;
+  let checkedFirebase:boolean=false;
   switch(this.storageType){
-    case storageTypeEnum.LOCAL:
-      checkedLocal=true;
+    case storageTypeEnum.JSON_SERVER:
+      checkedJsonServer=true;
       break;
-    case storageTypeEnum.REMOTE:
-      checkedRemote=true;
+    case storageTypeEnum.FIREBASE:
+      checkedFirebase=true;
       break;
   }
   const alert = await this.alertController.create({
     header: 'settings',
     inputs: [
       {
-        name: 'local',
+        name: 'json-server',
         type: 'radio',
-        label: 'local',
-        value: storageTypeEnum.LOCAL,
-        checked: checkedLocal
+        label: 'json-server',
+        value: storageTypeEnum.JSON_SERVER,
+        checked: checkedJsonServer
       },
       {
-        name: 'remoto',
+        name: 'firebase',
         type: 'radio',
-        label: 'remoto',
-        value: storageTypeEnum.REMOTE,
-        checked: checkedRemote
+        label: 'firebase',
+        value: storageTypeEnum.FIREBASE,
+        checked: checkedFirebase
       },
     ],
     buttons: [
@@ -249,7 +257,24 @@ async settings() {
         text: 'Ok',
         handler: (data) => {
           this.storage.set('storageType',data).then((data)=>{
-            this.storageType=data });
+            this.storageType=data 
+            switch(this.storageType){
+              case storageTypeEnum.JSON_SERVER:
+                this.apiService.getAlumnos()
+                  .then( (alumnos:Alumno[])=> {
+                    this.alumnos=alumnos;
+                  })
+                  .catch( (error:string) => {
+                      this.alumnos=new Array<Alumno>();
+                      this.presentToast("Error al obtener alumnos: "+error);
+                  });
+                break;
+              case storageTypeEnum.FIREBASE:
+                this.alumnos=new Array<Alumno>();
+                this.presentToast("Aún no se ha implementado la conexión a firebase");
+                break;
+            }//end_switch
+          });
         }
       }
     ]
