@@ -1,129 +1,6 @@
 {
   "alumnos": [
     {
-      "id": 22,
-      "first_name": "Shelbi jhjhggjh ",
-      "last_name": "Beauman fgfgdfg",
-      "email": "sbeaumanl@howstuffworks.com",
-      "gender": "Male",
-      "avatar": "https://robohash.org/quoanimiet.png?size=50x50&set=set1",
-      "address": "71 Arizona Parkway",
-      "city": "Carvoeira"
-    },
-    {
-      "id": 23,
-      "first_name": "Mathew",
-      "last_name": "Skakunas",
-      "email": "mskakunasm@umich.edu",
-      "gender": "Male",
-      "avatar": "https://robohash.org/quoasperioreset.bmp?size=50x50&set=set1",
-      "address": "74 Bayside Hill",
-      "city": "Dadian"
-    },
-    {
-      "id": 41,
-      "first_name": "Brok",
-      "last_name": "Begwell",
-      "email": "bbegwell14@guardian.co.uk",
-      "gender": "Male",
-      "avatar": "https://robohash.org/aplaceatquod.jpg?size=50x50&set=set1",
-      "address": "564 Stephen Plaza",
-      "city": "Huangchi"
-    },
-    {
-      "id": 48,
-      "first_name": "Lammond",
-      "last_name": "FitzGeorge",
-      "email": "lfitzgeorge1b@eventbrite.com",
-      "gender": "Male",
-      "avatar": "https://robohash.org/excepturiquamsed.bmp?size=50x50&set=set1",
-      "address": "296 Twin Pines Hill",
-      "city": "Gudang"
-    },
-    {
-      "id": 56,
-      "first_name": "Zebulon",
-      "last_name": "Tomich",
-      "email": "ztomich1j@bloglovin.com",
-      "gender": "Male",
-      "avatar": "https://robohash.org/voluptasdoloresquia.jpg?size=50x50&set=set1",
-      "address": "1193 Blaine Junction",
-      "city": "Vastervik"
-    },
-    {
-      "id": 58,
-      "first_name": "Donnajean hghghyghghg",
-      "last_name": "Brabbins",
-      "email": "dbrabbins1l@admin.ch",
-      "gender": "Female",
-      "avatar": "https://robohash.org/voluptasaccusamusrerum.jpg?size=50x50&set=set1",
-      "address": "56421 Southridge Pass",
-      "city": "Porto Unio"
-    },
-    {
-      "id": 77,
-      "first_name": "Ronnica",
-      "last_name": "Rivelon",
-      "email": "rrivelon24@linkedin.com",
-      "gender": "Female",
-      "avatar": "https://robohash.org/abquaequi.jpg?size=50x50&set=set1",
-      "address": "0 Erie Hill",
-      "city": "George Town"
-    },
-    {
-      "id": 78,
-      "first_name": "Jacynth",
-      "last_name": "Risborough",
-      "email": "jrisborough25@aboutads.info",
-      "gender": "Female",
-      "avatar": "https://robohash.org/iustoautoccaecati.png?size=50x50&set=set1",
-      "address": "2620 Green Ridge Pass",
-      "city": "Angers",
-      "postalCode": "49066 CEDEX 01"
-    },
-    {
-      "id": 79,
-      "first_name": "Khalil",
-      "last_name": "Astridge",
-      "email": "kastridge26@hugedomains.com",
-      "gender": "Male",
-      "avatar": "https://robohash.org/eosnihilvoluptates.jpg?size=50x50&set=set1",
-      "address": "7 Sheridan Junction",
-      "city": "Hengpi"
-    },
-    {
-      "id": 80,
-      "first_name": "Vick",
-      "last_name": "Vertey",
-      "email": "vvertey27@digg.com",
-      "gender": "Male",
-      "avatar": "https://robohash.org/autiusto.jpg?size=50x50&set=set1",
-      "address": "861 Summerview Parkway",
-      "city": "Jichang"
-    },
-    {
-      "id": 81,
-      "first_name": "Arabelle",
-      "last_name": "Mumberson",
-      "email": "amumberson28@hubpages.com",
-      "gender": "Female",
-      "avatar": "https://robohash.org/quibusdamtotamdeleniti.jpg?size=50x50&set=set1",
-      "address": "2204 Portage Point",
-      "city": "Raheny",
-      "postalCode": "D17"
-    },
-    {
-      "id": 82,
-      "first_name": "Ray",
-      "last_name": "Dufoure",
-      "email": "rdufoure29@ifeng.com",
-      "gender": "Male",
-      "avatar": "https://robohash.org/autnihilid.bmp?size=50x50&set=set1",
-      "address": "67 Waxwing Drive",
-      "city": "Birmingham",
-      "postalCode": "35205"
-    },
-    {
       "id": 83,
       "first_name": "Raynell",
       "last_name": "Pray",
@@ -182,8 +59,7 @@
       "gender": "Female",
       "avatar": "https://robohash.org/quilaudantiuminventore.jpg?size=50x50&set=set1",
       "address": "39 Oriole Pass",
-      "city": "Karnice",
-      "postalCode": "72-343"
+      "city": "Karnice"
     },
     {
       "id": 90,

@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import { Observable } from 'rxjs';
 import { Alumno } from 'src/app/modelo/alumno';
 import { InterfaceProvider } from 'src/app/modelo/interfaceProvider';
 
@@ -16,18 +17,10 @@ Si todo ha ido bien convertimos el array de objetos Json que nos llega a un arra
 Si el acceso ha ido mal devolvemos el mensaje de error que no llega mediante reject.
 */
 
-getAlumnos():Promise<Alumno[]> {
-    let promise = new Promise<Alumno[]>((resolve, reject) => {
-        this.storage.get("alumnos")
-            .then( (data)=>{
-                resolve(data);
-            })
-            .catch((error)=>{
-                reject(error);
-            });
-    });
-    return promise;
-}
+getAlumnos():Observable<any>{
+    let observable = new Observable<any>();
+    return observable;
+} 
 
 /*
 este método manda una solicitud de borrado a la Api del usuario con un id determinado.
@@ -35,15 +28,15 @@ Si el borrado va bien se sale son resolve devolviendo true.
 Si el borrado va mal se sale con reject, devolviendo el mensaje de error que nos llega
 */
 
-eliminarAlumno(id:number):Promise<Boolean>{
-    let promise = new Promise<Boolean>((resolve, reject) => {
+eliminarAlumno(id:number):Promise<void>{
+    let promise = new Promise<void>((resolve, reject) => {
         
         });
         return promise;
 }//end_eliminar_alumno
 
-modificarAlumno(idAlumno:number, nuevosDatosAlumno:Alumno):Promise<Alumno>{
-    let promise = new Promise<Alumno>((resolve, reject) => {
+modificarAlumno(idAlumno:number, nuevosDatosAlumno:Alumno):Promise<void>{
+    let promise = new Promise<void>((resolve, reject) => {
 
       });
       return promise;

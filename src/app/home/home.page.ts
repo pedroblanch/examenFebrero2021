@@ -36,29 +36,17 @@ Si ha ido mal el acceso (por ejemplo si no hemos lanzado jsonServer) se coge el 
 
 
   ngOnInit(): void {
-    this.storage.get('storageType')
-    .then((val) => {
-      if(val!=null)
-        this.storageType=val;
-      else
-        this.storageType=storageTypeEnum.JSON_SERVER;
-      switch(this.storageType){
-        case storageTypeEnum.JSON_SERVER:
-          this.apiService.getAlumnos()
-            .then( (alumnos:Alumno[])=> {
-              this.alumnos=alumnos;
-            })
-            .catch( (error:string) => {
-                this.presentToast("Error al obtener alumnos: "+error);
-            });
-          break;
-        case storageTypeEnum.FIREBASE:
-          this.presentToast("Aún no se ha implementado la conexión a firebase");
-          break;
-      }
-      })
-    .catch( () => {this.presentToast("Error al recuperar variable tipo de conexión");});
-  }
+    this.apiService.getAlumnos().subscribe((resultadoConsultaAlumnos) => {
+      this.alumnos = new Array<Alumno>();
+      resultadoConsultaAlumnos.forEach((datosTarea: any) => {
+        let alumnoJsonObject=datosTarea.payload.doc.data();
+        alumnoJsonObject.id=datosTarea.payload.doc.id,
+        this.alumnos.push(
+          Alumno.createFromJsonObject(alumnoJsonObject)
+        );
+      });
+    })
+  }//end_ngOnInit
 
 
 /*
@@ -67,103 +55,13 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
 */
   eliminarAlumno(indice:number){
     this.apiService.eliminarAlumno(this.alumnos[indice].id)
-    .then( (correcto:boolean ) => {
-      this.alumnos.splice(indice,1);
+    .then( () => {
+      //this.alumnos.splice(indice,1);
     })
     .catch( (error:string) => {
         this.presentToast("Error al borrar: "+error);
     });
   }//end_eliminar_alumno
-
-  /*
-  async modificarAlumno(indice:number) {
-    let alumno=this.alumnos[indice];
-    const alert = await this.alertController.create({
-      header: 'Modificar',
-      inputs: [
-        {
-          name: 'first_name',
-          type: 'text',
-          value: alumno.first_name,
-          placeholder: 'first_name'
-        },
-        {
-          name: 'last_name',
-          type: 'text',
-          id: 'last_name',
-          value: alumno.last_name,
-          placeholder: 'last_name'
-        },
-        {
-          name: 'email',
-          id: 'email',
-          type: 'text',
-          value: alumno.email,
-          placeholder: 'email'
-        },
-        {
-          name: 'gender',
-          type: 'radio',
-          label: 'Male',
-          value: 'Male',
-          checked: true
-        },
-        {
-          name: 'avatar',
-          value: alumno.avatar,
-          type: 'url',
-          placeholder: 'avatar'
-        },
-        {
-          name: 'address',
-          value: alumno.address,
-          type: 'text',
-          placeholder: 'address'
-        },
-        {
-          name: 'city',
-          value: alumno.city,
-          type: 'text',
-          placeholder: 'city'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Ok',
-          handler: (data) => {
-            console.log(data);
-            var alumnoModificado:Alumno=new Alumno(alumno.id,
-              data['first_name'],
-              data['last_name'],
-              data['email'],
-              data['gender'],
-              data['avatar'],
-              data['address'],
-              data['city']);
-            this.apiService.modificarAlumno(alumno.id,alumnoModificado)
-              .then( (alumno:Alumno)=> {
-                this.alumnos[indice]=alumno;
-              })
-              .catch( (error:string) => {
-                  console.log(error);
-              });
-            console.log('Confirm Ok');
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }//end_modificarAlumno
-  */
-
 
  async modificarAlumno(indice:number) {
   const modal = await this.modalController.create({
@@ -178,8 +76,8 @@ Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
       let alumnoJSON=JSON.parse(data['data']);
       let alumnoModificado:Alumno = Alumno.createFromJsonObject(alumnoJSON);
       this.apiService.modificarAlumno(alumnoModificado.id,alumnoModificado)  //se hace PUT a la API
-              .then( (alumno:Alumno)=> {
-                this.alumnos[indice]=alumno;  //si se ha modificado en la api se actualiza en la lista
+              .then( ()=> {
+                //this.alumnos[indice]=alumnoModificado;  //si se ha modificado en la api se actualiza en la lista
               })
               .catch( (error:string) => {
                   this.presentToast("Error al modificar: "+error);
@@ -206,7 +104,7 @@ async nuevoAlumno() {
       let alumnoNuevo:Alumno = Alumno.createFromJsonObject(alumnoJSON);      
       this.apiService.insertarAlumno(alumnoNuevo)  //se hace POST a la API
               .then( (alumno:Alumno)=> {
-                this.alumnos.push(alumno);  //si se ha insertado en la api se añade en la lista
+                //this.alumnos.push(alumno);  //si se ha insertado en la api se añade en la lista
               })
               .catch( (error:string) => {
                   this.presentToast("Error al insertar: "+error);
@@ -216,72 +114,6 @@ async nuevoAlumno() {
   
   return await modal.present();
 } //end_nuevoAlumno
-
-async settings() {
-  let checkedJsonServer:boolean=false;
-  let checkedFirebase:boolean=false;
-  switch(this.storageType){
-    case storageTypeEnum.JSON_SERVER:
-      checkedJsonServer=true;
-      break;
-    case storageTypeEnum.FIREBASE:
-      checkedFirebase=true;
-      break;
-  }
-  const alert = await this.alertController.create({
-    header: 'settings',
-    inputs: [
-      {
-        name: 'json-server',
-        type: 'radio',
-        label: 'json-server',
-        value: storageTypeEnum.JSON_SERVER,
-        checked: checkedJsonServer
-      },
-      {
-        name: 'firebase',
-        type: 'radio',
-        label: 'firebase',
-        value: storageTypeEnum.FIREBASE,
-        checked: checkedFirebase
-      },
-    ],
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        cssClass: 'secondary',
-        handler: () => {
-        }
-      }, {
-        text: 'Ok',
-        handler: (data) => {
-          this.storage.set('storageType',data).then((data)=>{
-            this.storageType=data 
-            switch(this.storageType){
-              case storageTypeEnum.JSON_SERVER:
-                this.apiService.getAlumnos()
-                  .then( (alumnos:Alumno[])=> {
-                    this.alumnos=alumnos;
-                  })
-                  .catch( (error:string) => {
-                      this.alumnos=new Array<Alumno>();
-                      this.presentToast("Error al obtener alumnos: "+error);
-                  });
-                break;
-              case storageTypeEnum.FIREBASE:
-                this.alumnos=new Array<Alumno>();
-                this.presentToast("Aún no se ha implementado la conexión a firebase");
-                break;
-            }//end_switch
-          });
-        }
-      }
-    ]
-  });
-
-  await alert.present();
-}//end_settings
 
 async presentToast(message:string) {
   const toast = await this.toastController.create({

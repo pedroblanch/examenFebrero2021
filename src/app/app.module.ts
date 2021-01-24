@@ -8,8 +8,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
 import { ApiServiceProvider } from 'src/providers/api-service';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -18,7 +20,9 @@ import { IonicStorageModule } from '@ionic/storage';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), 
     IonicStorageModule.forRoot(), 
-    AppRoutingModule, HttpClientModule],
+    AppRoutingModule, 
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule],
   providers: [
     StatusBar,
     SplashScreen,

@@ -1,8 +1,9 @@
+import { Observable } from 'rxjs';
 import { Alumno } from './alumno';
 
 export interface InterfaceProvider {
-    getAlumnos():Promise<Alumno[]>;
-    eliminarAlumno(id:number):Promise<Boolean>;
-    modificarAlumno(idAlumno:number, nuevosDatosAlumno:Alumno):Promise<Alumno>;
+    getAlumnos():Observable<any>;
+    eliminarAlumno(id:number):Promise<void>;
+    modificarAlumno(idAlumno:number, nuevosDatosAlumno:Alumno):Promise<void>;
     insertarAlumno(datosNuevoAlumno:Alumno):Promise<Alumno>;
 }
