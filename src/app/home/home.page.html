@@ -15,8 +15,12 @@
   <ion-card *ngFor="let alumno of alumnos; let indice=index;">
     <ion-grid>
       <ion-row>
-        <ion-col size=8>{{alumno.last_name}}, {{alumno.first_name}}</ion-col>
-        <ion-col size=1></ion-col>
+        <ion-col style="display: flex; justify-content: center" size=3>
+          <ion-avatar>
+            <img [src]="alumno.avatar">
+          </ion-avatar>   
+        </ion-col>
+        <ion-col size=6>{{alumno.last_name}}, {{alumno.first_name}}</ion-col>
         <ion-col size=1>
           <button ion-button icon-only (click)="modificarAlumno(indice)">
             <ion-icon name="create-outline"></ion-icon>

@@ -20,8 +20,6 @@ enum storageTypeEnum {
 export class HomePage implements OnInit{
 
   private alumnos=new Array<Alumno>();
-  private storageType:string;
-  
 
   constructor(private apiService: ApiServiceProvider,
     public alertController:AlertController, public modalController: ModalController,
@@ -36,6 +34,7 @@ Si ha ido mal el acceso (por ejemplo si no hemos lanzado jsonServer) se coge el 
 
 
   ngOnInit(): void {
+    //this.apiService.loadFiles();
     this.apiService.getAlumnos().subscribe((resultadoConsultaAlumnos) => {
       this.alumnos = new Array<Alumno>();
       resultadoConsultaAlumnos.forEach((datosTarea: any) => {
@@ -48,15 +47,18 @@ Si ha ido mal el acceso (por ejemplo si no hemos lanzado jsonServer) se coge el 
     })
   }//end_ngOnInit
 
-
 /*
 este método llama al método eliminarAlumno de la Api y le pasa el id del alumno a eliminar. Se devuelve un objeto Promise. Si el borrado ha ido bien se ejecuta el código asociado a la cláusula then. Símplemente se muestra por consola un mensaje y se elimina el alumno del array de alumnos de la clase, lo que hará que deje de verse en la vista.
 Si el borrado ha ido mal muestro por consola el error que ha ocurrido.
 */
   eliminarAlumno(indice:number){
+    var urlAvatar=this.alumnos[indice].avatar;
     this.apiService.eliminarAlumno(this.alumnos[indice].id)
     .then( () => {
-      //this.alumnos.splice(indice,1);
+      //los datos del alumno se han eliminado correctamente de cloud firestore
+      //elimino la imagen de avatar del storage de firebase
+      this.apiService.removeImage(urlAvatar);
+      //this.alumnos.splice(indice,1);  No hace falta quitarlo del array. Se recarga todo el array de forma automática
     })
     .catch( (error:string) => {
         this.presentToast("Error al borrar: "+error);

@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Alumno } from 'src/app/modelo/alumno';
-import { InterfaceProvider } from 'src/app/modelo/interfaceProvider';
 
 @Injectable()
-export class StorageServiceProvider implements InterfaceProvider{
+export class StorageServiceProvider {
     
 constructor(public storage: Storage){
 }
