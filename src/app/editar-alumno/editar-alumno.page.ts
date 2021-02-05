@@ -4,12 +4,6 @@ import { ModalController } from '@ionic/angular';
 import { ApiServiceProvider } from 'src/providers/api-service';
 import { Alumno } from '../modelo/alumno';
 
-export interface imgFile {
-  name: string;
-  filepath: string;
-  size: number;
-}
-
 @Component({
   selector: 'app-editar-alumno',
   templateUrl: './editar-alumno.page.html',
