@@ -5,6 +5,7 @@ import { EditarAlumnoPage } from '../editar-alumno/editar-alumno.page';
 import { Alumno } from '../modelo/alumno';
 
 import { Storage } from '@ionic/storage';
+import { FirebaseAuthService } from 'src/providers/firebase-auth.service';
 
 enum storageTypeEnum {
   JSON_SERVER='JSON_SERVER',
@@ -23,7 +24,8 @@ export class HomePage implements OnInit{
 
   constructor(private apiService: ApiServiceProvider,
     public alertController:AlertController, public modalController: ModalController,
-    private storage: Storage, public toastController: ToastController) {
+    private storage: Storage, public toastController: ToastController,
+    public firebaseAuthService:FirebaseAuthService) {
   }
 
 /*
@@ -45,6 +47,33 @@ Si ha ido mal el acceso (por ejemplo si no hemos lanzado jsonServer) se coge el 
         );
       });
     })
+    /*prueba de registro de usuario
+    /*
+    this.firebaseAuthService.registerUser("pedroblanch@iesjulioverne.es","123456")
+      .then( (data)=>{
+        console.log("Registro correcto");
+      })
+      .catch( (error)=>{
+          console.log("Error en el registro: "+error['message']);
+      });
+      */
+
+      /*prueba de login
+      Si el login no fuese correcto no dejaría subir ficheros al storage, pues sus 
+      reglas obligan a que lo haga un usuario logueado
+      */
+     this.firebaseAuthService.loginUser("pedroblanch@iesjulioverne.es","123456")
+      .then( (data)=>{
+        console.log("login correcto");
+        this.firebaseAuthService.userDetails()
+          .subscribe( data => {
+            console.log(data);
+          });
+      })
+      .catch( (error)=>{
+          console.log("Error en el login: "+error['message']);
+      });
+
   }//end_ngOnInit
 
 /*

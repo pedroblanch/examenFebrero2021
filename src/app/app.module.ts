@@ -15,6 +15,8 @@ import { environment } from '../environments/environment';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { FirebaseAuthService } from 'src/providers/firebase-auth.service';
 
 
 @NgModule({
@@ -24,11 +26,13 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     IonicStorageModule.forRoot(), 
     AppRoutingModule, 
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
     AngularFirestoreModule, AngularFireStorageModule],
   providers: [
     StatusBar,
     SplashScreen,
     ApiServiceProvider,
+    FirebaseAuthService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
