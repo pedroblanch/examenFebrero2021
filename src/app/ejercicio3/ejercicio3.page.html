@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ejercicio3</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf='partido'>
+    <ion-grid>
+      <ion-row class="equipos">
+        <ion-col size=6>{{partido.equipoLocal}}</ion-col>
+        <ion-col size=6>{{partido.equipoVisitante}}</ion-col>
+      </ion-row>
+      <ion-row class="marcador">
+        <ion-col size=6>{{partido.puntosLocal}}</ion-col>
+        <ion-col size=6>{{partido.puntosVisitante}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size=2>'
+          <ion-button [disabled]='partido.finalizado' size='large' (click)="incrementarPuntuacion('local',1)">
+            1
+          </ion-button>
+        </ion-col>
+        <ion-col size=2>
+          <ion-button [disabled]='partido.finalizado' size='large' (click)="incrementarPuntuacion('local',2)">
+            2
+          </ion-button>
+        </ion-col>
+        <ion-col size=2>
+          <ion-button [disabled]='partido.finalizado' size='large' (click)="incrementarPuntuacion('local',3)">
+            3
+          </ion-button>
+        </ion-col>
+        <ion-col size=2>
+          <ion-button [disabled]='partido.finalizado' size='large' (click)="incrementarPuntuacion('visitante',1)">
+            1
+          </ion-button>
+        </ion-col>
+        <ion-col size=2>
+          <ion-button [disabled]='partido.finalizado' size='large' (click)="incrementarPuntuacion('visitante',2)">
+            2
+          </ion-button>
+        </ion-col>
+        <ion-col size=2>
+          <ion-button [disabled]='partido.finalizado' size='large' (click)="incrementarPuntuacion('visitante',3)">
+            3
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size=6  class="ion-text-center">
+          <ion-button [disabled]='partido.finalizado' size='large' (click)="anularPuntuacion('local')">
+            Back
+          </ion-button>
+        </ion-col>
+        <ion-col size=6  class="ion-text-center">
+          <ion-button [disabled]='partido.finalizado' size='large' (click)="anularPuntuacion('visitante')">
+            Back
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size=12  class="ion-text-center">
+          <ion-button [disabled]='partido.finalizado' size='large' (click)="finalizarPartido()">
+            Finalizar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+</ion-content>

@@ -8,12 +8,28 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'inicio',
     pathMatch: 'full'
   },
   {
     path: 'editar-alumno',
     loadChildren: () => import('./editar-alumno/editar-alumno.module').then( m => m.EditarAlumnoPageModule)
+  },
+  {
+    path: 'inicio',
+    loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
+  },
+  {
+    path: 'ejercicio1',
+    loadChildren: () => import('./ejercicio1/ejercicio1.module').then( m => m.Ejercicio1PageModule)
+  },
+  {
+    path: 'ejercicio2',
+    loadChildren: () => import('./ejercicio2/ejercicio2.module').then( m => m.Ejercicio2PageModule)
+  },
+  {
+    path: 'ejercicio3',
+    loadChildren: () => import('./ejercicio3/ejercicio3.module').then( m => m.Ejercicio3PageModule)
   },
 ];
 

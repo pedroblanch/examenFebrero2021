@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>   
+    <ion-title>
+      EJERCICIO 2
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1>Disputados</h1>
+  <ion-card *ngFor="let partido of partidosDisputados; let indice=index;">
+    <ion-grid>
+      <ion-row>
+        <ion-col size=4>{{partido.fecha}}</ion-col>
+        <ion-col size=4>{{partido.equipoLocal}}<br>{{partido.puntosLocal}}</ion-col>
+        <ion-col size=3>{{partido.equipoVisitante}}<br>{{partido.puntosVisitante}}</ion-col>
+        <ion-col size=1>
+          <button ion-button icon-only (click)="uploadToFirebase(indice, true)">
+            <ion-icon name="create-outline"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <h1>No Disputados</h1>
+  <ion-card *ngFor="let partido of partidosNoDisputados; let indice=index;">
+    <ion-grid>
+      <ion-row>
+        <ion-col size=4>{{partido.fecha}}</ion-col>
+        <ion-col size=4>{{partido.equipoLocal}}<br>{{partido.puntosLocal}}</ion-col>
+        <ion-col size=3>{{partido.equipoVisitante}}<br>{{partido.puntosVisitante}}</ion-col>
+        <ion-col size=1>
+          <button ion-button icon-only (click)="uploadToFirebase(indice,false)">
+            <ion-icon name="create-outline"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

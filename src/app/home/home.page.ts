@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
-import { ApiServiceProvider } from 'src/providers/api-service';
+import { ApiServiceProviderFirebase } from 'src/providers/api-service-firebase';
 import { EditarAlumnoPage } from '../editar-alumno/editar-alumno.page';
 import { Alumno } from '../modelo/alumno';
 
@@ -22,7 +22,7 @@ export class HomePage implements OnInit{
 
   private alumnos=new Array<Alumno>();
 
-  constructor(private apiService: ApiServiceProvider,
+  constructor(private apiService: ApiServiceProviderFirebase,
     public alertController:AlertController, public modalController: ModalController,
     private storage: Storage, public toastController: ToastController,
     public firebaseAuthService:FirebaseAuthService) {

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+     
+    </ion-buttons>
+    <ion-title>EJERCICIO 1</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+    
+    <ion-item>
+      <ion-label position="floating" color="primary">avatar 1</ion-label>
+      <ion-input type="text" formControlName="avatar1" hidden></ion-input>
+      <ion-avatar>
+        <img [src]="urlAvatar1">
+      </ion-avatar>      
+      <ion-button [disabled]="validations_form.valid" color="primary" shape="round" size="medium">
+        <input type="file" (change)="uploadImage1($event.target.files)" />
+      </ion-button>  
+    </ion-item>
+
+    <ion-item *ngIf="urlAvatar1">
+      <ion-label position="floating" color="primary">avatar 2</ion-label>
+      <ion-input type="text" formControlName="avatar2" hidden></ion-input>
+      <ion-avatar>
+        <img [src]="urlAvatar2">
+      </ion-avatar>      
+      <ion-button [disabled]="validations_form.valid" color="primary" shape="round" size="medium">
+        <input type="file" (change)="uploadImage2($event.target.files)" />
+      </ion-button>  
+    </ion-item>
+
+    <ion-item *ngIf="urlAvatar2">
+      <ion-label position="floating" color="primary">avatar 3</ion-label>
+      <ion-input type="text" formControlName="avatar3" hidden></ion-input>
+      <ion-avatar>
+        <img [src]="urlAvatar3">
+      </ion-avatar>      
+      <ion-button [disabled]="validations_form.valid" color="primary" shape="round" size="medium">
+        <input type="file" (change)="uploadImage3($event.target.files)" />
+      </ion-button>  
+    </ion-item>
+
+    <ion-button 
+        routerLink="/inicio" routerDirection="forward"
+        color="primary" class="submit-btn" expand="block" type="submit" [disabled]="!validations_form.valid">Submit data</ion-button>
+    
+    <ion-button ion-button 
+        routerLink="/inicio" routerDirection="forward"
+        (click)="close()">Close</ion-button>
+
+  </form>
+</ion-content>
+

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { ApiServiceProvider } from 'src/providers/api-service';
+import { ApiServiceProviderFirebase } from 'src/providers/api-service-firebase';
 import { Alumno } from '../modelo/alumno';
 
 @Component({
@@ -18,7 +18,7 @@ export class EditarAlumnoPage implements OnInit {
 
   constructor( public formBuilder: FormBuilder,
         public modalCtrl: ModalController,
-        public apiService:ApiServiceProvider) { }
+        public apiService:ApiServiceProviderFirebase) { }
 
   ngOnInit() {
     this.alumno=JSON.parse(this.alumnoJson);
