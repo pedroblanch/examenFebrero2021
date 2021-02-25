@@ -1,0 +1,94 @@
+{
+  "partidos": [
+    {
+      "id": 1,
+      "fecha": "03/04/2021",
+      "equipoLocal": "Beaverlodge",
+      "equipoVisitante": "Zhanghua",
+      "puntosLocal": 0,
+      "puntosVisitante": 0,
+      "finalizado": false
+    },
+    {
+      "id": 2,
+      "fecha": "23/06/2021",
+      "equipoLocal": "Kálamos",
+      "equipoVisitante": "Şuwayr",
+      "puntosLocal": 95,
+      "puntosVisitante": 76,
+      "finalizado": true
+    },
+    {
+      "id": 3,
+      "fecha": "21/09/2020",
+      "equipoLocal": "Boyuibe",
+      "equipoVisitante": "Tolosa",
+      "puntosLocal": 3,
+      "puntosVisitante": 3,
+      "finalizado": true
+    },
+    {
+      "id": 4,
+      "fecha": "07/10/2020",
+      "equipoLocal": "Sedayulawas",
+      "equipoVisitante": "Troitskiy",
+      "puntosLocal": 114,
+      "puntosVisitante": 98,
+      "finalizado": true
+    },
+    {
+      "id": 5,
+      "fecha": "30/09/2020",
+      "equipoLocal": "Kelmė",
+      "equipoVisitante": "Glendale",
+      "puntosLocal": 62,
+      "puntosVisitante": 78,
+      "finalizado": true
+    },
+    {
+      "id": 6,
+      "fecha": "09/03/2021",
+      "equipoLocal": "Akouda",
+      "equipoVisitante": "Paris 17",
+      "puntosLocal": 102,
+      "puntosVisitante": 101,
+      "finalizado": true
+    },
+    {
+      "id": 7,
+      "fecha": "16/12/2020",
+      "equipoLocal": "Cuiabá",
+      "equipoVisitante": "Taihe",
+      "puntosLocal": 89,
+      "puntosVisitante": 95,
+      "finalizado": true
+    },
+    {
+      "id": 8,
+      "fecha": "21/11/2020",
+      "equipoLocal": "Urasqui",
+      "equipoVisitante": "Nanjia",
+      "puntosLocal": 65,
+      "puntosVisitante": 70,
+      "finalizado": true
+    },
+    {
+      "id": 9,
+      "fecha": "17/01/2021",
+      "equipoLocal": "Pojok",
+      "equipoVisitante": "Duboka",
+      "puntosLocal": 0,
+      "puntosVisitante": 0,
+      "finalizado": false
+    },
+    {
+      "id": 10,
+      "fecha": "14/05/2021",
+      "equipoLocal": "Bianba",
+      "equipoVisitante": "Río Grande",
+      "puntosLocal": 0,
+      "puntosVisitante": 0,
+      "finalizado": false
+    }
+  ]
+}

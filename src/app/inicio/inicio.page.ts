@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -8,12 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioPage implements OnInit {
 
- 
+  idPartido:string='';
 
-  constructor( ) { }
+  constructor(private navCtrl: NavController ) { }
 
   ngOnInit() {
     
+  }
+
+  ejercicio3(){
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          idPartido: JSON.stringify(this.idPartido)
+      }
+    };
+    this.navCtrl.navigateForward('/ejercicio3', navigationExtras);
   }
 
 

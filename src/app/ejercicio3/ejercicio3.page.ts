@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { ApiServiceJsonServerProvider } from 'src/providers/api-service-jsonserver';
 import { Partido } from '../modelo/partido';
@@ -10,16 +11,21 @@ import { Partido } from '../modelo/partido';
 })
 export class Ejercicio3Page implements OnInit{
 
-  id:string='3';
+  idPartido;
   partido:Partido;
   pilaPuntosLocal:number[]=new Array<number>();
   pilaPuntosVisitante:number[]=new Array<number>();
 
   constructor(public apiServiceJsonServer:ApiServiceJsonServerProvider,
-    public alertController:AlertController) { }
+    public alertController:AlertController, public activatedRoute: ActivatedRoute) { 
+      this.activatedRoute.queryParams.subscribe(params => {
+        this.idPartido = JSON.parse(params['idPartido']);
+      });  
+    }
 
   ngOnInit() {
-    this.apiServiceJsonServer.getPartido(this.id)
+      
+    this.apiServiceJsonServer.getPartido(this.idPartido)
     .then( (partido)=>{
         this.partido=partido;
         console.log(this.partido);
